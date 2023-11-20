@@ -1,0 +1,23 @@
+/* Product.css */
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+    /* Adjust as needed for spacing */
+  }
+  
+  .product-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    /* Add any other styling you prefer for the product box */
+  }
+  
+  .product-image {
+    max-width: 100%;
+    height: auto;
+    /* Set the maximum width for the image */
+    /* Adjust height as needed */
+  }
+  
