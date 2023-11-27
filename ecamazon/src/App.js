@@ -16,7 +16,7 @@ const App = () => {
               <Link to="/" className="nav-link">Shop</Link>
             </li>
             <li>
-              <Link to="/cart" className="nav-link">Cart</Link>
+              <Link to="/Cart" className="nav-link">Cart</Link>
             </li>
           </ul>
         </div>
