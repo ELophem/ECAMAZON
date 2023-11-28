@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as  Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useShopContext } from './shop-context';
 import './Product.css';
 import './Cart.css';
