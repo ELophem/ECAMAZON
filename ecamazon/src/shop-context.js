@@ -8,21 +8,47 @@ export const ShopContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
-    setCartItems([...cartItems, product]);
+    const existingItemIndex = cartItems.findIndex((item) => item.id === product.id);
+
+    if (existingItemIndex !== -1) {
+      const updatedCart = [...cartItems];
+      updatedCart[existingItemIndex] = {
+        ...updatedCart[existingItemIndex],
+        quantity: updatedCart[existingItemIndex].quantity + 1,
+      };
+      setCartItems(updatedCart);
+    } else {
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
   };
+
   const removeFromCart = (product) => {
-    const updatedCart = cartItems.filter((item) => item !== product);
-    setCartItems(updatedCart);
+    const existingItemIndex = cartItems.findIndex((item) => item.id === product.id);
+
+    if (existingItemIndex !== -1) {
+      const updatedCart = [...cartItems];
+
+      if (updatedCart[existingItemIndex].quantity > 1) {
+        updatedCart[existingItemIndex] = {
+          ...updatedCart[existingItemIndex],
+          quantity: updatedCart[existingItemIndex].quantity - 1,
+        };
+      } else {
+        updatedCart.splice(existingItemIndex, 1);
+      }
+
+      setCartItems(updatedCart);
+    }
   };
-  
+
   const getTotalCartAmount = () => {
-    return cartItems.reduce((total, product) => total + product.price, 0);
+    return cartItems.reduce((total, product) => total + product.price * product.quantity, 0);
   };
 
   return (
-      <ShopContext.Provider value={{ cartItems, addToCart,removeFromCart, getTotalCartAmount }}>
-        {children}
-      </ShopContext.Provider>
+    <ShopContext.Provider value={{ cartItems, addToCart, removeFromCart, getTotalCartAmount }}>
+      {children}
+    </ShopContext.Provider>
   );
 };
 

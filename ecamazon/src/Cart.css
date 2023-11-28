@@ -1,0 +1,82 @@
+/* cart.css */
+
+/* Cart header */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Individual cart item container */
+  li {
+    list-style: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Product image */
+  img {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+  }
+  
+  /* Product description */
+  .description {
+    flex: 1;
+  }
+  
+  /* Product name */
+  .description p:first-child {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Product price */
+  .description p:last-child {
+    color: #888;
+    margin-bottom: 5px;
+  }
+  
+  /* Add to cart button */
+  button.addToCart {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  /* Remove from cart button */
+  button.removeFromCart {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  /* Total amount section */
+  .totalAmount {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  
+  /* Continue shopping and Checkout buttons */
+  .actionButtons {
+    margin-top: 20px;
+  }
+  
+  .actionButtons button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .actionButtons button a {
+    text-decoration: none;
+    color: inherit;
+  }
+  

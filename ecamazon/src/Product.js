@@ -8,7 +8,7 @@ const Product = () => {
 
   useEffect(() => {
     // Fetch products from your API when the component mounts
-    fetch('http://localhost:3000/products')
+    fetch('http://localhost:3001/products')
       .then((response) => response.json())
       .then((data) => {
         setProducts(data); // Set the fetched products to state
