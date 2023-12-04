@@ -51,7 +51,7 @@ const Cart = () => {
         <button>
           <Link to="/">Continue Shopping</Link>
         </button>
-        <button>Checkout</button>
+        <button><Link to="/checkout">Checkout</Link></button>
       </div>
     </div>
   );

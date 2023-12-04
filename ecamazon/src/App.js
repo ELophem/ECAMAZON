@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Shop from './Shop';
 import Cart from './Cart';
 import { ShopContextProvider } from './shop-context'; // Import the ShopContextProvider
-
+import Checkout from './Checkout';
 import './styles.css';
 
 const App = () => {
@@ -23,6 +23,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+
         </Routes>
       </Router>
     </ShopContextProvider>
