@@ -4,6 +4,7 @@ import Shop from './Shop';
 import Cart from './Cart';
 import { ShopContextProvider } from './shop-context'; // Import the ShopContextProvider
 import Checkout from './Checkout';
+import OrdersPage from './Orders';
 import './styles.css';
 
 const App = () => {
@@ -22,8 +23,9 @@ const App = () => {
         </div>
         <Routes>
           <Route path="/" element={<Shop />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/Cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/orders" element={<OrdersPage />} />
 
         </Routes>
       </Router>

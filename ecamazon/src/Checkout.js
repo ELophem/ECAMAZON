@@ -1,36 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { useShopContext } from './shop-context';
 import './LoadingSpinner.css'; // Import your CSS file for styling
 
 const Checkout = () => {
   const { cartItems, getTotalCartAmount } = useShopContext();
-  const [isLoading, setIsLoading] = useState(false);
   const [clientName, setClientName] = useState('');
-
-  useEffect(() => {
-    // Simulating payment processing with API call
-    setIsLoading(true);
-    // Perform API call for payment verification here
-    setTimeout(() => {
-      // Simulating API response delay
-      setIsLoading(false);
-    }, 3000); // Simulating a 3-second delay
-  }, []);
 
   const handleOrderPlacement = () => {
     // You can perform the payment API call here and then proceed to store the order
     // Replace this setTimeout with your actual API call for payment
     setTimeout(() => {
       // Simulating a successful payment
+      const formattedCartItems = cartItems.map(item => ({
+        id: item.id,
+        name: item.name,
+        quantity: `${item.quantity}`,
+        price: item.price
+      }));
+  
       const orderData = {
         orderId: generateOrderId(), // Replace with your method to generate an order ID
-        articles: cartItems,
+        articles: formattedCartItems, // Updated articles field with necessary information
         amount: getTotalCartAmount(),
         clientName: clientName
       };
-
+  
       // Replace this with your actual API call to store the order
-      fetch('http://localhost:4000/storeOrder', {
+      fetch('http://localhost:4000/api/orders/storeOrder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -46,21 +42,16 @@ const Checkout = () => {
         });
     }, 1000); // Simulating a 1-second delay before placing the order
   };
+  
 
   const generateOrderId = () => {
     // Replace this with your method to generate a unique order ID
-    return `ORDER-${Math.floor(Math.random() * 10000)}`;
+    return `${Math.floor(Math.random() * 10000)}`;
   };
 
   return (
     <div>
       <h1>Checkout</h1>
-      {isLoading ? (
-        <div className="loading-spinner">
-          <div className="spinner"></div>
-          <p>Processing your payment...</p>
-        </div>
-      ) : (
         <div>
           <h2>Cart Summary</h2>
           <ul>
@@ -79,7 +70,7 @@ const Checkout = () => {
           />
           <button onClick={handleOrderPlacement}>Place Order</button>
         </div>
-      )}
+
     </div>
   );
 };
