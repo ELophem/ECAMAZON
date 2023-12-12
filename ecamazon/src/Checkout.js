@@ -7,7 +7,42 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { cartItems, getTotalCartAmount, clearCart } = useShopContext();
   const [clientName, setClientName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [userId, setUserId] = useState(null); // State to store user ID
 
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    try {
+      const response = await fetch('http://localhost:3333/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Connexion réussie
+        console.log('Connexion réussie, ID de utilisateur :', data.id);
+
+        // Mettre à jour l'état ou effectuer d'autres actions après la connexion réussie
+        setClientName(username); // Par exemple, définir le nom du client après la connexion réussie
+        setUserId(data.id);
+
+      } else {
+        // Gérer les erreurs de connexion
+        throw new Error(data.error || 'Échec de la connexion');
+      }
+    } catch (error) {
+      console.error('Échec de la connexion :', error.message);
+      setLoginError(error.message); // Définir l'erreur de connexion pour l'afficher à l'utilisateur
+    }
+  };
   const handleOrderPlacement = () => {
     // You can perform the payment API call here and then proceed to store the order
     // Replace this setTimeout with your actual API call for payment
@@ -24,7 +59,7 @@ const Checkout = () => {
         orderId: generateOrderId(), // Replace with your method to generate an order ID
         articles: formattedCartItems, // Updated articles field with necessary information
         amount: getTotalCartAmount(),
-        clientName: clientName
+        clientName: username
       };
   
       // Replace this with your actual API call to store the order
@@ -66,12 +101,28 @@ const Checkout = () => {
           ))}
         </ul>
         <p>Total Amount: ${getTotalCartAmount()}</p>
-        <input
-          type="text"
-          placeholder="Enter your name"
-          value={clientName}
-          onChange={(e) => setClientName(e.target.value)}
-        />
+        {clientName ? (
+          <p>Logged in as: {clientName}</p>
+        ) : (
+          <form onSubmit={handleLogin}>
+            <input
+              type="text"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button type="submit">Login</button>
+            {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
+          </form>
+        )}
+        {userId && <p>User ID: {userId}</p>} {/* Display user ID */}
+        
         <button onClick={handleOrderPlacement}>Place Order</button>
       </div>
     </div>
