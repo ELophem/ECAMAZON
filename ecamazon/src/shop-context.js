@@ -44,12 +44,15 @@ export const ShopContextProvider = ({ children }) => {
   const getTotalCartAmount = () => {
     return cartItems.reduce((total, product) => total + product.price * product.quantity, 0);
   };
+  const clearCart = () => {
+    setCartItems([]); // Set cartItems state to an empty array to clear the cart
+  };
 
   return (
-    <ShopContext.Provider value={{ cartItems, addToCart, removeFromCart, getTotalCartAmount }}>
+    <ShopContext.Provider value={{ cartItems, addToCart, removeFromCart, getTotalCartAmount, clearCart }}>
       {children}
     </ShopContext.Provider>
   );
 };
 
-export default ShopContext; // Export ShopContext as default
+export default ShopContext; 

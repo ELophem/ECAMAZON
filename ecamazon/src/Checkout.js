@@ -1,9 +1,11 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useShopContext } from './shop-context';
+import { useNavigate } from 'react-router-dom';
 import './LoadingSpinner.css'; // Import your CSS file for styling
 
 const Checkout = () => {
-  const { cartItems, getTotalCartAmount } = useShopContext();
+  const navigate = useNavigate();
+  const { cartItems, getTotalCartAmount, clearCart } = useShopContext();
   const [clientName, setClientName] = useState('');
 
   const handleOrderPlacement = () => {
@@ -36,6 +38,8 @@ const Checkout = () => {
         .then(response => {
           // Handle response if needed
           console.log('Order placed successfully!');
+          clearCart(); // Clear the cart after successful order placement
+          navigate('/'); // Redirect to the shop page after successful order placement
         })
         .catch(error => {
           console.error('Error placing order:', error);
@@ -52,25 +56,24 @@ const Checkout = () => {
   return (
     <div>
       <h1>Checkout</h1>
-        <div>
-          <h2>Cart Summary</h2>
-          <ul>
-            {cartItems.map((product) => (
-              <li key={product.id}>
-                <p>{product.name} - ${product.price}</p>
-              </li>
-            ))}
-          </ul>
-          <p>Total Amount: ${getTotalCartAmount()}</p>
-          <input
-            type="text"
-            placeholder="Enter your name"
-            value={clientName}
-            onChange={(e) => setClientName(e.target.value)}
-          />
-          <button onClick={handleOrderPlacement}>Place Order</button>
-        </div>
-
+      <div>
+        <h2>Cart Summary</h2>
+        <ul>
+          {cartItems.map((product) => (
+            <li key={product.id}>
+              <p>{product.name} - ${product.price}</p>
+            </li>
+          ))}
+        </ul>
+        <p>Total Amount: ${getTotalCartAmount()}</p>
+        <input
+          type="text"
+          placeholder="Enter your name"
+          value={clientName}
+          onChange={(e) => setClientName(e.target.value)}
+        />
+        <button onClick={handleOrderPlacement}>Place Order</button>
+      </div>
     </div>
   );
 };
