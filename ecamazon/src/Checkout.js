@@ -63,7 +63,7 @@ const Checkout = () => {
       };
   
       // Replace this with your actual API call to store the order
-      fetch('http://localhost:4000/api/orders/storeOrder', {
+      fetch('http://localhost:5000/api/orders/storeOrder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

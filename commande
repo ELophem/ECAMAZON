@@ -1,0 +1,24 @@
+#créér un réseau dans docker
+docker network create ecamazon
+
+#creer un fichier dockerfile pour le front
+#créer une image dans le répertoire contenant le dockerfile du front
+docker build -t front .
+#lancer le conteneur dans le réseau et port 4000
+docker run -d --network=ecamazon -p 4000:3000 --name conteneur1 front
+
+#Base de donnée
+créer un dockerfile
+et un un fichier init.sql
+docker build -t db .
+docker run -d --network=ecamazon -p 3000:3306 --name conteneur4 db
+dans index.js et server.js changer localhost par le nom du conteneur de la base de donnée 
+
+#de même pour de shop
+docker build -t api .
+docker run -d --network=ecamazon -p 3000:3000 --name conteneur2 api
+
+#pareil pour ORDERS
+docker build -t orders .
+docker run -d --network=ecamazon -p 5000:5000 --name conteneur3 orders
+
