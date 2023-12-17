@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: shop-frontend
-        image: dorianp29/ecamazon  # Use the Docker Hub image reference
+        image: dorianp29/ecamazon:1.0  # Use the Docker Hub image reference
         ports:
         - containerPort: 80
