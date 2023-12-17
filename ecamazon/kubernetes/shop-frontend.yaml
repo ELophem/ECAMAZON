@@ -1,0 +1,21 @@
+# shop-frontend.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shop-frontend
+  template:
+    metadata:
+      labels:
+        app: shop-frontend
+    spec:
+      containers:
+      - name: shop-frontend
+        image: dorianp29/ecamazon  # Use the Docker Hub image reference
+        ports:
+        - containerPort: 80
