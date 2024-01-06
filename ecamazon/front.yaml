@@ -31,6 +31,45 @@ spec:
   - protocol: TCP
     port: 5000
     targetPort: 5000
+---
 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: orders
+  template:
+    metadata:
+      labels:
+        app: orders
+    spec:
+      containers:
+      - name: ecamazan-orders
+        image: dorianp29/ecamazan-orders:1.0
+        ports:
+          - containerPort: 4000
+---
 
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: ecamazan-db
+        image: dorianp29/ecamazan-db:1.0
+        ports:
+          - containerPort: 3306
