@@ -17,7 +17,7 @@ const OrdersPage = () => {
   }, []);
 
   const handleDeleteOrder = () => {
-    // Make a DELETE request to delete the order by orderIdToDelete
+
     axios.delete(`http://localhost:4000/api/orders/deleteOrder/${orderIdToDelete}`)
       .then(response => {
         console.log('Order deleted successfully');
