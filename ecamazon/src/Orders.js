@@ -7,7 +7,7 @@ const OrdersPage = () => {
 
   useEffect(() => {
     // Fetch orders when component mounts
-    axios.get('http://localhost:5000/api/orders/orders')
+    axios.get('http://localhost:4000/api/orders/orders')
       .then(response => {
         setOrders(response.data);
       })
@@ -18,11 +18,11 @@ const OrdersPage = () => {
 
   const handleDeleteOrder = () => {
     // Make a DELETE request to delete the order by orderIdToDelete
-    axios.delete(`http://localhost:5000/api/orders/deleteOrder/${orderIdToDelete}`)
+    axios.delete(`http://localhost:4000/api/orders/deleteOrder/${orderIdToDelete}`)
       .then(response => {
         console.log('Order deleted successfully');
         // Refresh the orders list after deletion
-        axios.get('http://localhost:5000/api/orders/orders')
+        axios.get('http://localhost:4000/api/orders/orders')
           .then(response => {
             setOrders(response.data);
           })

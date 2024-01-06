@@ -45,7 +45,7 @@ const Cart = () => {
         </ul>
       </div>
       <div>
-        <p>Total: {getTotalCartAmount()}</p>
+        <p>Total: ${getTotalCartAmount()}</p>
       </div>
       <div>
         <button>
