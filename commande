@@ -11,7 +11,7 @@ docker run -d --network=ecamazon -p 4000:3000 --name conteneur1 front
 créer un dockerfile
 et un un fichier init.sql
 docker build -t db .
-docker run -d --network=ecamazon -p 3000:3306 --name conteneur4 db
+docker run -d --network=ecamazon -p 3004:3306 --name conteneur4 db
 dans index.js et server.js changer localhost par le nom du conteneur de la base de donnée 
 
 #de même pour de shop
